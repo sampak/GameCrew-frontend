@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import UserContext from './contexts/UserContext';
 import { useState } from 'react';
 import { IUser } from './dto/base/IUser';
+import './translation/i18n';
 
 const queryClient = new QueryClient({
   defaultOptions: {

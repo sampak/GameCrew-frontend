@@ -8,6 +8,8 @@ import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import authService from '../../../api/authService';
 import { setToken } from '../../../api/user';
+import useLang from '../../../hooks/useLang';
+import { getApiError } from '../../../utils/getApiError';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -18,6 +20,8 @@ const SignIn = () => {
     trigger,
     formState: { errors },
   } = useForm();
+
+  const { getLang } = useLang('signIn');
 
   const { mutate: signIn } = authService.useSignIn();
 
@@ -37,6 +41,10 @@ const SignIn = () => {
           setToken(data.token);
           navigate('/');
         },
+
+        onError: (err) => {
+          console.log(getApiError(err, getLang));
+        },
       }
     );
   };
@@ -54,7 +62,7 @@ const SignIn = () => {
         <div className="relative my-2 w-full inline-flex items-center justify-center w-full">
           <hr className="w-full h-px bg-deepNavy-500 border-0 absolute top-1/2 " />
           <span className="absolute px-3 font-medium -translate-x-1/2 top-1/2 bg-white -translate-y-1/2 left-1/2 text-deepNavy-500">
-            or
+            {getLang('orText')}
           </span>
         </div>
 
@@ -71,7 +79,7 @@ const SignIn = () => {
               <Input
                 value={value ?? ''} // Ensuring the value is always defined
                 onChange={(text) => onChange(text)}
-                placeholder="Enter login"
+                placeholder={getLang('placeholderLogin')}
                 label=""
                 onBlur={onBlur}
                 ref={ref}
@@ -87,7 +95,7 @@ const SignIn = () => {
               <Input
                 value={value ?? ''} // Ensuring the value is always defined
                 onChange={(text) => onChange(text)}
-                placeholder="Enter password"
+                placeholder={getLang('placeholderPassword')}
                 label=""
                 type="password"
                 onBlur={onBlur}
@@ -96,7 +104,7 @@ const SignIn = () => {
             )}
           />
           <Button isDisabled={isError} type="submit" className="mt-5 w-full">
-            Sign In
+            {getLang('signInButton')}
           </Button>
         </form>
 
@@ -104,7 +112,7 @@ const SignIn = () => {
           onClick={handleClickNeedAccount}
           className="flex justify-center"
         >
-          Need account create now!
+          {getLang('needAccountButton')}
         </CTAButton>
       </div>
     </AuthLayout>
