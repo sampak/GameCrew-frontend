@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import authService from '../../../api/authService';
 import { setToken } from '../../../api/user';
 import useLang from '../../../hooks/useLang';
+import { getApiError } from '../../../utils/getApiError';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -39,6 +40,10 @@ const SignIn = () => {
         onSuccess: (data) => {
           setToken(data.token);
           navigate('/');
+        },
+
+        onError: (err) => {
+          console.log(getApiError(err, getLang));
         },
       }
     );

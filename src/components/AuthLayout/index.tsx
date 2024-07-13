@@ -1,6 +1,5 @@
 import { FC, Props } from './typings';
 import Logo from '../../assets/logo.svg?react';
-import i18next from 'i18next';
 
 const AuthLayout: FC<Props> = ({ children }) => {
   return (

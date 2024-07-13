@@ -5,6 +5,10 @@ export const TRANSLATIONS_EN = {
     signInButton: 'Sign In',
     needAccountButton: 'Need account create now!',
     orText: 'or',
+
+    errors: {
+      NOT_FOUND: 'credentials invalid',
+    },
   },
   signUp: {
     placeholderLogin: 'Enter login',
@@ -14,6 +18,10 @@ export const TRANSLATIONS_EN = {
     signUpButton: 'Sign up',
     alreadyAccountButton: 'Already have account sign in!',
     orText: 'or',
+
+    errors: {
+      USER_EXISTS: 'A user with this login or email already exists',
+    },
   },
 
   socialButtons: {
