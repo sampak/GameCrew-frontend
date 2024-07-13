@@ -1,32 +1,39 @@
-import { createBrowserRouter } from "react-router-dom";
-import AppLayout from "./components/AppLayout";
-import SignIn from "./modules/auth/SignIn";
-import SignUp from "./modules/auth/SignUp";
+import { createBrowserRouter } from 'react-router-dom';
+import AppLayout from './components/AppLayout';
+import SignIn from './modules/auth/SignIn';
+import SignUp from './modules/auth/SignUp';
+import ProtectedRoute from './components/ProtectedRoute';
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <AppLayout><>a</></AppLayout>,
+    path: '/',
+    element: (
+      <ProtectedRoute>
+        <AppLayout>
+          <>a</>
+        </AppLayout>
+      </ProtectedRoute>
+    ),
   },
   {
-    path: "/auth",
+    path: '/auth',
     children: [
       {
         path: 'sign-in',
-        element: <SignIn />
-      },      
+        element: <SignIn />,
+      },
       {
         path: 'sign-up',
-        element: <SignUp />
+        element: <SignUp />,
       },
       {
         path: '',
-        element:  <SignIn />
+        element: <SignIn />,
       },
       {
         path: '*',
-        element:  <SignIn />
+        element: <SignIn />,
       },
-    ]
+    ],
   },
 ]);
