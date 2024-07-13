@@ -1,14 +1,33 @@
-import { RouterProvider } from 'react-router-dom'
-import { router } from './router'
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import UserContext from './contexts/UserContext';
+import { useState } from 'react';
+import { IUser } from './dto/base/IUser';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+    },
+  },
+});
 function App() {
+  const [user, setUser] = useState<IUser | null>(null);
+
   return (
-    // <AppLayout>
-    //   <div className="bg-primary">
-    //     a
-    //   </div>
-    // </AppLayout>
-    <RouterProvider router={router} />
-  )
+    <QueryClientProvider client={queryClient}>
+      <UserContext.Provider
+        value={{
+          user,
+          setUser,
+        }}
+      >
+        <RouterProvider router={router} />
+      </UserContext.Provider>
+    </QueryClientProvider>
+  );
 }
 
-export default App
+export default App;
