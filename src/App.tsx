@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import AppLayout from './components/AppLayout'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './router'
 function App() {

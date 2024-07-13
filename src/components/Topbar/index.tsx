@@ -1,4 +1,3 @@
-import Avatar from "../Avatar";
 import Input from "../Input";
 
 const Topbar = () => {
