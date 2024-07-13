@@ -8,6 +8,7 @@ import { Controller, FieldValues, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import authService from '../../../api/authService';
 import { setToken } from '../../../api/user';
+import useLang from '../../../hooks/useLang';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ const SignUp = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  const { getLang } = useLang('signUp');
 
   const { mutate: signUp } = authService.useSignUp();
 
@@ -68,7 +71,7 @@ const SignUp = () => {
         <div className="relative my-2 w-full inline-flex items-center justify-center w-full">
           <hr className="w-full h-px bg-deepNavy-500 border-0 absolute top-1/2 " />
           <span className="absolute px-3 font-medium -translate-x-1/2 top-1/2 bg-white -translate-y-1/2 left-1/2 text-deepNavy-500">
-            or
+            {getLang('orText')}
           </span>
         </div>
 
@@ -85,7 +88,7 @@ const SignUp = () => {
               <Input
                 value={value ?? ''} // Ensuring the value is always defined
                 onChange={(text) => onChange(text)}
-                placeholder="Enter login"
+                placeholder={getLang('placeholderLogin')}
                 label=""
                 onBlur={onBlur}
                 ref={ref}
@@ -102,7 +105,7 @@ const SignUp = () => {
               <Input
                 value={value ?? ''} // Ensuring the value is always defined
                 onChange={(text) => onChange(text)}
-                placeholder="Enter E-Mail"
+                placeholder={getLang('placeholderEmail')}
                 label=""
                 onBlur={onBlur}
                 ref={ref}
@@ -118,7 +121,7 @@ const SignUp = () => {
               <Input
                 value={value ?? ''} // Ensuring the value is always defined
                 onChange={(text) => onChange(text)}
-                placeholder="Enter password"
+                placeholder={getLang('placeholderPassword')}
                 label=""
                 type="password"
                 onBlur={onBlur}
@@ -135,7 +138,7 @@ const SignUp = () => {
               <Input
                 value={value ?? ''} // Ensuring the value is always defined
                 onChange={(text) => onChange(text)}
-                placeholder="Enter password again"
+                placeholder={getLang('placeholderRepassword')}
                 label=""
                 type="password"
                 onBlur={onBlur}
@@ -144,12 +147,12 @@ const SignUp = () => {
             )}
           />
           <Button isDisabled={isError} type="submit" className="mt-5">
-            Sign up
+            {getLang('signUpButton')}
           </Button>
         </form>
 
         <CTAButton onClick={handleClickAccount} className="flex justify-center">
-          Already have account sign in!
+          {getLang('alreadyAccountButton')}
         </CTAButton>
       </div>
     </AuthLayout>
