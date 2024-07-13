@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getToken } from './user';
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: import.meta.env.VITE_API ?? 'http://localhost:4000',
   headers: {
     'content-type': 'application/json',
   },
